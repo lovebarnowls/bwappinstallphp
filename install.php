@@ -1,17 +1,23 @@
 <?php
+// Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-// Include database connection details
-include("admin/config.inc.php");
+// Hard-coded database connection details
+$server = "localhost";
+$db_username = "bwapp_user";
+$db_password = "password";
+$db_name = "bWAPP";
 
-// Connect to the existing bWAPP database
-$link = new mysqli($server, $db_username, $db_password, "bWAPP");
+// Create a connection object
+$link = new mysqli($server, $db_username, $db_password, $db_name);
 
-// Check the connection
+// Check connection
 if ($link->connect_error) {
     die("Connection failed: " . $link->connect_error);
 }
 
-echo "Connected to existing 'bWAPP' database.<br>";
+echo "Connected to 'bWAPP' database.<br>";
 
 // Array of table creation queries
 $tables = [
