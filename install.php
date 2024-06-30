@@ -1,25 +1,17 @@
 <?php
 
 // Include database connection details
-include("config.inc.php");
+include("admin/config.inc.php");
 
-// Connect to the server without selecting a database
-$link = new mysqli($server, $username, $password);
+// Connect to the existing bWAPP database
+$link = new mysqli($server, $db_username, $db_password, "bWAPP");
 
 // Check the connection
 if ($link->connect_error) {
     die("Connection failed: " . $link->connect_error);
 }
 
-// Create the bWAPP database if it doesn't exist
-$sql = "CREATE DATABASE IF NOT EXISTS bWAPP";
-if (!$link->query($sql)) {
-    die("Error creating database: " . $link->error);
-}
-echo "Database 'bWAPP' created or already exists.<br>";
-
-// Select the bWAPP database
-$link->select_db("bWAPP");
+echo "Connected to existing 'bWAPP' database.<br>";
 
 // Array of table creation queries
 $tables = [
@@ -107,3 +99,4 @@ foreach ($insert_data as $table_name => $query) {
 $link->close();
 
 echo "Database setup completed.";
+?>
